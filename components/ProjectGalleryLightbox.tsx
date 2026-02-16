@@ -33,9 +33,9 @@ export default function ProjectGalleryLightbox({
 
   return (
     <>
-      {/* Your grid (same layout, but opens lightbox) */}
-      <div className="mt-6 grid grid-cols-3 gap-6">
-        {safeImages.slice(0, 3).map((img, i) => (
+      {/* Grid (all thumbnails same size) */}
+      <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-6">
+        {safeImages.map((img, i) => (
           <button
             key={`${img.src}-${i}`}
             type="button"
@@ -43,39 +43,18 @@ export default function ProjectGalleryLightbox({
               setIndex(i)
               setOpen(true)
             }}
-            className="block relative aspect-[4/3] overflow-hidden bg-neutral-100"
+            className="relative aspect-[4/3] overflow-hidden bg-neutral-100"
             aria-label={`Open image ${i + 1}`}
           >
-            <Image src={img.src} alt={img.alt} fill className="object-cover" />
-          </button>
-        ))}
-
-        {safeImages[3] ? (
-          <button
-            key={`${safeImages[3].src}-3`}
-            type="button"
-            onClick={() => {
-              setIndex(3)
-              setOpen(true)
-            }}
-            className="col-span-3 md:col-span-2 block relative aspect-[4/3] overflow-hidden bg-neutral-100"
-            aria-label="Open image 4"
-          >
             <Image
-              src={safeImages[3].src}
-              alt={safeImages[3].alt}
+              src={img.src}
+              alt={img.alt}
               fill
               className="object-cover"
+              sizes="(min-width: 768px) 33vw, 50vw"
             />
-            {safeImages.length > 4 ? (
-              <div className="absolute inset-0 bg-black/35 flex items-center justify-center">
-                <div className="text-white font-black text-3xl tracking-tight">
-                  +{safeImages.length - 4}
-                </div>
-              </div>
-            ) : null}
           </button>
-        ) : null}
+        ))}
       </div>
 
       {/* Lightbox */}

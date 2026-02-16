@@ -41,7 +41,7 @@ export default function AboutCultureSection() {
   }
 
   return (
-    <section className="relative">
+    <section id="culture" className="relative">
       {/* ================= MOBILE ================= */}
       <div className="md:hidden">
         {/* Top image */}

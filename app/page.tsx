@@ -15,6 +15,7 @@ const cards = [
     buttonText: "About Us",
     image: "/card1.png",
     location: "right" as const,
+    href: "/about",
   },
   {
     header: "A Culture Built on Integrity and Craft",
@@ -23,6 +24,7 @@ const cards = [
     buttonText: "Learn More",
     image: "/card2.png",
     location: "left" as const,
+    href: "/about#culture",
   },
   {
     header: "Our Projects, Our Purpose",
@@ -31,6 +33,7 @@ const cards = [
     buttonText: "View Projects",
     image: "/card3.png",
     location: "right" as const,
+    href: "/projects",
   },
 ]
 
@@ -49,6 +52,7 @@ export default function HomePage() {
           buttonText={card.buttonText}
           image={card.image}
           location={card.location}
+          href={card.href}
         />
       ))}
       </div>

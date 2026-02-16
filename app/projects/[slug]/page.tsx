@@ -28,7 +28,6 @@ export default async function ProjectPage({
 
   const recent = getRecentProjects(project.slug, 3)
 
-  // ✅ bulletproof strings (never pass objects to Image src)
   const heroSrc = project.heroImage?.src || project.cardImage?.src
   const heroAlt = project.heroImage?.alt || project.cardImage?.alt || project.title
 
@@ -38,60 +37,32 @@ export default async function ProjectPage({
 
       {/* ================= HERO ================= */}
       <section className="relative h-[420px] md:h-[560px] w-full overflow-hidden">
-        <Image
-          src={heroSrc}
-          alt={heroAlt}
-          fill
-          priority
-          className="object-cover"
-        />
+        <Image src={heroSrc} alt={heroAlt} fill priority className="object-cover" />
 
-        {/* main overlay */}
         <div className="absolute inset-0 bg-black/20" />
 
-        {/* content wrapper */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-
           <div className="max-w-6xl w-full">
             <p className="text-white/85 tracking-[0.25em] text-xs md:text-sm font-semibold">
               {project.completedLabel}
             </p>
 
-            <h1 className="mt-4 text-white font-black leading-[0.95] tracking-[-0.03em]
-                          text-4xl sm:text-5xl md:text-7xl">
+            <h1 className="mt-4 text-white font-black leading-[0.95] tracking-[-0.03em] text-4xl sm:text-5xl md:text-7xl">
               {project.title}
             </h1>
           </div>
 
-          {/* spacing between heading and meta bar */}
           <div className="mt-16 md:mt-24 w-full px-6">
-            <div className="mx-auto max-w-6xl bg-black/40
-                            px-6 md:px-10
-                            py-4 md:py-6 lg:py-8">
-              
-              <div className="grid grid-cols-3 items-center
-                              text-white font-extrabold
-                              text-sm md:text-base lg:text-lg">
-                
-                <div className="text-left">
-                  {project.locationLabel}
-                </div>
-
-                <div className="text-center">
-                  {project.serviceLabel}
-                </div>
-
-                <div className="text-right">
-                  {project.yearLabel}
-                </div>
-
+            <div className="mx-auto max-w-6xl bg-black/40 px-6 md:px-10 py-4 md:py-6 lg:py-8">
+              <div className="grid grid-cols-3 items-center text-white font-extrabold text-sm md:text-base lg:text-lg">
+                <div className="text-left">{project.locationLabel}</div>
+                <div className="text-center">{project.serviceLabel}</div>
+                <div className="text-right">{project.yearLabel}</div>
               </div>
             </div>
           </div>
-
         </div>
 
-        {/* RED BOTTOM LINE */}
         <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#E7000B]" />
       </section>
 
@@ -103,10 +74,9 @@ export default async function ProjectPage({
               {project.challengeTitle}
             </h2>
 
-            {/* If challengeBody is a long multi-paragraph string, preserve line breaks */}
             <div
-                className="mt-6 text-[20px] md:text-base leading-9 text-black/50 text-balance"
-                dangerouslySetInnerHTML={{ __html: project.challengeBody }}
+              className="mt-6 text-[20px] md:text-base leading-9 text-black/50 text-balance"
+              dangerouslySetInnerHTML={{ __html: project.challengeBody }}
             />
           </div>
 
@@ -118,15 +88,13 @@ export default async function ProjectPage({
             <ProjectGalleryLightbox images={project.galleryImages} />
 
             <div className="mt-10 bg-[#111] text-white px-8 py-7">
-                <h3 className="text-xl md:text-2xl font-bold">
-                {project.noteworthyTitle}
-                </h3>
+              <h3 className="text-xl md:text-2xl font-bold">{project.noteworthyTitle}</h3>
             </div>
 
             <ul className="mt-6 list-disc pl-6 space-y-1 text-[20px] italic font-medium text-black/90">
-                {project.noteworthyBullets.map((b) => (
+              {project.noteworthyBullets.map((b) => (
                 <li key={b}>{b}</li>
-                ))}
+              ))}
             </ul>
           </div>
         </div>
@@ -135,8 +103,7 @@ export default async function ProjectPage({
       {/* ================= RECENT PROJECTS ================= */}
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-6 md:px-8 py-16 md:py-20 text-center">
-          <p className="text-notmal tracking-[0.35em] font-semibold text-black/50
-              underline decoration-[#E7000B] decoration-2 underline-offset-4">
+          <p className="text-notmal tracking-[0.35em] font-semibold text-black/50 underline decoration-[#E7000B] decoration-2 underline-offset-4">
             VIEW OTHER
           </p>
 
@@ -144,18 +111,20 @@ export default async function ProjectPage({
             Recent Projects
           </h2>
 
+          {/* ✅ UPDATED: whole cards are links */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             {recent.map((p) => (
-              <div
+              <Link
                 key={p.slug}
-                className="bg-white border border-black/10 shadow-sm overflow-hidden"
+                href={`/projects/${p.slug}`}
+                className="group block bg-white border border-black/10 shadow-sm overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="relative aspect-[16/9] bg-neutral-100">
+                <div className="relative aspect-[16/9] bg-neutral-100 overflow-hidden">
                   <Image
                     src={p.cardImage.src}
                     alt={p.cardImage.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
 
@@ -164,21 +133,18 @@ export default async function ProjectPage({
                     {p.cardTitle}
                   </h3>
 
-                  <Link
-                    href={`/projects/${p.slug}`}
-                    className="inline-block mt-6 text-[#E7000B] font-bold tracking-[0.15em] text-xs"
-                  >
+                  {/* not a Link anymore (prevents nested links) */}
+                  <span className="inline-block mt-6 text-[#E7000B] font-bold tracking-[0.15em] text-xs">
                     VIEW DETAILS
-                  </Link>
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
           <Link
             href="/projects"
-            className="inline-flex items-center justify-center mt-14 bg-[#E7000B] text-white
-                       font-extrabold tracking-[0.18em] text-xs px-10 py-5"
+            className="inline-flex items-center justify-center mt-14 bg-[#E7000B] text-white font-extrabold tracking-[0.18em] text-xs px-10 py-5"
           >
             VIEW ALL PROJECTS
           </Link>

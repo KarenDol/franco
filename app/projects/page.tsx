@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       <section className="relative flex items-center justify-center min-h-[295px] lg:min-h-[365px]">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/projects.jpeg')" }}
+          style={{ backgroundImage: "url('/projects.png')" }}
         >
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -41,7 +41,7 @@ export default function ProjectsPage() {
               <Link
                 key={p.slug}
                 href={`/projects/${p.slug}`}
-                className="group block overflow-hidden rounded-sm bg-white shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.15)]"
+                className="group block cursor-pointer overflow-hidden rounded-sm bg-white shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.15)]"
               >
                 {/* Image */}
                 <div className="relative h-48 w-full overflow-hidden">

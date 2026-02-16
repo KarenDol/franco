@@ -72,7 +72,7 @@ export default function TimelineSection() {
   return (
     <section className="bg-[#f5f5f5] px-6 py-8 lg:py-12">
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-12 text-center text-2xl font-bold uppercase tracking-tight text-foreground lg:text-3xl">
+        <h2 className="mb-6 text-center text-2xl font-bold uppercase tracking-tight text-foreground lg:text-3xl">
           A Family Tradition Lives On
         </h2>
 
