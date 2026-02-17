@@ -95,7 +95,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
       lead: "We have over 50 years of experience in restoring concrete to help maximize the return on your investment.",
       points: ["Classic Restoration", "Concrete Resurfacing", "Minimal Business Disruption", "Foundation Stabilization", "Structural Repair"],
     },
-    gallery: ["/services/service3_gallery1.png", "/services/service3_gallery2.jpg", "/services/service3_gallery3.jpg"],
+    gallery: ["/services/service3_gallery1.png", "/services/service3_gallery2.jpg", "/services/service3_gallery3.jpg", "/services/service3_gallery4.png"],
   },
 
   historic: {
@@ -106,18 +106,18 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
         "Historic restoration and preservation services for aging masonry and concrete structures.",
     },
     hero: {
-      bgImage: "/services/service4_hero.jpg",
+      bgImage: "/services/service4_hero.png",
       eyebrow: "Services",
       headingLine1: "Historic",
       headingLine2: "Restorations",
     },
     description: "Our Historic Restoration experience goes back over 50 years. We’ve earned a name in Historic Restorations in the state of Connecticut for both our time in the industry and reputation for taking on a variety of challenging Historic Restoration projects. From storefronts to historic buildings, large or small, we have seen it all and have the skills, the tools, and the people to take on the challenge.",
     why: {
-      image: "/services/service4_card.jpg",
+      image: "/services/service4_card.png",
       lead: "We have over 50 years of experience in Historic Restorations to help maximize the return on your investment.",
       points: ["Mortar Repair", "Brick Repair", "Block Repair", "Historic Structures"],
     },
-    gallery: ["/services/service4_gallery1.jpg", "/services/service4_gallery2.png", "/services/service4_gallery3.jpg"],
+    gallery: ["/services/service4_gallery1.jpg", "/services/service4_gallery2.png", "/services/service4_gallery3.jpg", "/services/service4_gallery4.png"],
   },
 
   waterproofing: {
@@ -138,7 +138,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
       lead: "We have over 50 years of experience in Waterproofing maximizing the lifespan of your facility or structure.",
       points: ["Protective Coatings", "Expansion Joint Repairs", "Leak & Crack Repairs", "Deck Waterproofing", "Leak/Waterstop Repairs"],
     },
-    gallery: ["/services/service5_gallery1.png", "/services/service5_gallery2.jpg", "/services/service5_gallery3.png"],
+    gallery: ["/services/service5_gallery1.png",  "/services/service5_gallery2.png", "/services/service5_gallery3.jpg", "/services/service5_gallery4.png"],
   },
 
   "high-rise": {
