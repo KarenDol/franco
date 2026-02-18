@@ -1,7 +1,13 @@
-// lib/projects.ts
+// ✅ lib/projects.ts
+// FULL FILE: adds lowSrc for heroImage, cardImage, and every gallery image
+// Low-src convention: inserts `_low` before extension
+//   /projects/project1.jpg  -> /projects/project1_low.jpg
+//   /projects/project1/img4.jpeg -> /projects/project1/img4_low.jpeg
+// Supports: jpg, jpeg, png, webp
 
 export type ProjectGalleryImage = {
   src: string
+  lowSrc: string
   alt: string
 }
 
@@ -14,6 +20,7 @@ export type Project = {
   yearLabel: string
   heroImage: {
     src: string
+    lowSrc: string
     alt: string
   }
   challengeTitle: string
@@ -22,11 +29,25 @@ export type Project = {
   noteworthyBullets: string[]
   galleryTitle: string
   galleryImages: ProjectGalleryImage[]
-  cardImage: { src: string; alt: string }
+  cardImage: { src: string; lowSrc: string; alt: string }
   cardTitle: string
 }
 
-export const projects: Project[] = [
+// Turn "/path/img.jpg" -> "/path/img_low.jpg"
+function toLowSrc(src: string) {
+  // remove extension (.jpg/.png/etc)
+  const base = src.replace(/\.[^/.]+$/, "")
+  return `${base}-low.jpg`
+}
+
+// Keep raw objects clean (no lowSrc) and we derive it below
+type RawProject = Omit<Project, "heroImage" | "cardImage" | "galleryImages"> & {
+  heroImage: { src: string; alt: string }
+  cardImage: { src: string; alt: string }
+  galleryImages: { src: string; alt: string }[]
+}
+
+const RAW_PROJECTS: RawProject[] = [
   {
     slug: "yale-amistad",
     title: "Yale University – Amistad Parking Garage Repairs",
@@ -40,7 +61,6 @@ export const projects: Project[] = [
     },
 
     challengeTitle: "Our Challenge",
-    // ✅ HTML so you get the same formatting as your screenshot
     challengeBody: `
       <p style="margin: 0; font-weight: 700; color: rgba(0,0,0,0.55);">
         Project Overview
@@ -109,7 +129,6 @@ export const projects: Project[] = [
     `.trim(),
 
     noteworthyTitle: "Noteworthy Stats",
-    // ✅ match your screenshot bullets
     noteworthyBullets: [
       "Restore structural integrity.",
       "Enhance waterproofing and reduce infiltration.",
@@ -120,7 +139,6 @@ export const projects: Project[] = [
     ],
 
     galleryTitle: "Project Gallery",
-    // You can swap these paths to your real gallery photos later
     galleryImages: [
       { src: "/projects/project1/img1.jpg", alt: "Amistad Garage aerial view" },
       { src: "/projects/project1/img2.jpg", alt: "Top deck / roof area" },
@@ -134,6 +152,7 @@ export const projects: Project[] = [
     },
     cardTitle: "Yale University – Amistad\nParking Garage Repairs",
   },
+
   {
     slug: "naugatuck-hillside",
     title: "Naugatuck Hillside Intermediate School",
@@ -164,6 +183,7 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project2.jpg", alt: "Naugatuck Hillside Intermediate School" },
     cardTitle: "Naugatuck Hillside\nIntermediate School",
   },
+
   {
     slug: "yale-hill-house",
     title: "Yale President’s House: Hill House",
@@ -185,7 +205,7 @@ export const projects: Project[] = [
       "Skilled Masonry Work & Design",
       "Window Restoration",
       "Roof Repairs",
-      "Historical Restoration of Exterior and Interior"
+      "Historical Restoration of Exterior and Interior",
     ],
 
     galleryTitle: "Project Gallery",
@@ -194,6 +214,7 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project3.jpg", alt: "Yale President’s House Hill House" },
     cardTitle: "Yale President’s House\nHill House",
   },
+
   {
     slug: "st-mary-church-stamford",
     title: "St. Mary Church of Stamford",
@@ -217,7 +238,7 @@ export const projects: Project[] = [
       "Full Repointing of Historic Masonry",
       "Removal & Replication of Precast Concrete",
       "Restoration & Sealing of Original Window Assemblies",
-      "Renovation of Historical Architectural Integrity"
+      "Renovation of Historical Architectural Integrity",
     ],
 
     galleryTitle: "Project Gallery",
@@ -226,6 +247,7 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project4.png", alt: "St. Mary Church of Stamford" },
     cardTitle: "St. Mary Church\nof Stamford",
   },
+
   {
     slug: "bradley-international-parking-garage",
     title: "Bradley International Parking Garage",
@@ -247,7 +269,7 @@ export const projects: Project[] = [
       "Extensive Concrete Repairs",
       "Shear Connector Restoration",
       "Pressure Epoxy Injections",
-      "Restoration and Waterproofing"
+      "Restoration and Waterproofing",
     ],
 
     galleryTitle: "Project Gallery",
@@ -256,6 +278,7 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project5.png", alt: "Bradley International Parking Garage" },
     cardTitle: "Bradley International\nParking Garage",
   },
+
   {
     slug: "lafayette-street-parking-garage",
     title: "Lafayette Street Parking Garage",
@@ -280,7 +303,7 @@ export const projects: Project[] = [
       "Heavy-duty membrane system installation",
       "Epoxy injection and hydrophobic grout crack treatment",
       "Double tee flange connector and bearing pad replacement",
-      "Structural and waterproofing restoration"
+      "Structural and waterproofing restoration",
     ],
 
     galleryTitle: "Project Gallery",
@@ -289,6 +312,7 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project6.png", alt: "Lafayette Street Parking Garage" },
     cardTitle: "Lafayette Street\nParking Garage",
   },
+
   {
     slug: "providence-federal-courthouse",
     title: "Providence Federal Courthouse",
@@ -311,7 +335,7 @@ export const projects: Project[] = [
       "Precision Repointing of Mortar Joints",
       "Facade Cleaning & Protective Water Repellents",
       "Restoration of Ornate Architectural Details",
-      "Masonry and Historic Restoration"
+      "Masonry and Historic Restoration",
     ],
 
     galleryTitle: "Project Gallery",
@@ -320,6 +344,7 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project7.jpg", alt: "Providence Federal Courthouse" },
     cardTitle: "Providence Federal\nCourthouse",
   },
+
   {
     slug: "church-street-garage",
     title: "Church Street Garage",
@@ -346,13 +371,12 @@ export const projects: Project[] = [
     ],
 
     galleryTitle: "Project Gallery",
-    galleryImages: [
-      { src: "/projects/project8.png", alt: "Concrete repair work" },
-    ],
+    galleryImages: [{ src: "/projects/project8.png", alt: "Concrete repair work" }],
 
     cardImage: { src: "/projects/project8.png", alt: "Church Street Garage" },
     cardTitle: "Church Street\nGarage",
   },
+
   {
     slug: "hartford-hospital-employee-garage",
     title: "Hartford Hospital Employee Garage",
@@ -368,21 +392,17 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "At the Employee Garage at Hartford Hospital Frank Capasso and Sons had performed extensive restoration and upgrades to the parking garage. The scope of work included the installation of an epoxy overlay system to protect the garage floors and enhance durability. A heat sealer was applied for added protection against environmental exposure. Vertical and overhead concrete repairs were conducted to restore structural integrity, while supplemental connections were installed to reinforce the existing framework. Cove joint installation and detailing were completed to improve joint performance, and a protective membrane was installed to prevent water infiltration. The project also involved the replacement of multiple staircases to ensure safety and accessibility. Plumbing work and drainage improvements were executed to enhance water management within the garage, preventing future issues caused by water accumulation. These comprehensive repairs and upgrades ensure the long-term functionality and safety of the Hartford Hospital Employee Garage, providing a reliable and well-maintained facility for hospital staff.",
+
     noteworthyTitle: "Noteworthy Stats",
-    noteworthyBullets: [
-      "Concrete Repairs",
-      "Joint Installation",
-      "Parking Garage Restoration"
-    ],
+    noteworthyBullets: ["Concrete Repairs", "Joint Installation", "Parking Garage Restoration"],
 
     galleryTitle: "Project Gallery",
-    galleryImages: [
-      { src: "/projects/project9.png", alt: "Concrete deck repair detail" },
-    ],
+    galleryImages: [{ src: "/projects/project9.png", alt: "Concrete deck repair detail" }],
 
     cardImage: { src: "/projects/project9.png", alt: "Hartford Hospital Employee Garage" },
     cardTitle: "Hartford Hospital\nEmployee Garage",
   },
+
   {
     slug: "hartford-hospital-retreat-garage",
     title: "Hartford Hospital Retreat Parking Garage",
@@ -398,22 +418,22 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "Frank Capasso & Sons was contracted to perform a comprehensive restoration of the Retreat Garage at Hartford Hospital. The scope of work involved the removal and replacement of existing topping slabs to address surface damage and improve overall durability. Full-depth tee flange repairs were executed to reinforce the garage’s structural support system. Additionally, new curbs were installed, and significant concrete repairs were performed on the inverted T beams to restore stability. Joint sealant was applied to the newly installed concrete slabs to ensure proper water resistance, and new floor drains were installed to enhance drainage and prevent future water-related issues. This extensive restoration ensures a safer, more resilient parking facility for hospital staff and visitors, while enhancing the long-term structural performance of the garage.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Concrete Repairs",
       "Joint Installation/Sealing",
       "Full-depth Tee Repairs",
-      "Concrete Restoration"
+      "Concrete Restoration",
     ],
 
     galleryTitle: "Project Gallery",
-    galleryImages: [
-      { src: "/projects/project10.jpg", alt: "Concrete restoration work" },
-    ],
+    galleryImages: [{ src: "/projects/project10.jpg", alt: "Concrete restoration work" }],
 
     cardImage: { src: "/projects/project10.jpg", alt: "Hartford Hospital Retreat Parking Garage" },
     cardTitle: "Hartford Hospital Retreat\nParking Garage",
   },
+
   {
     slug: "colt-gateway-building",
     title: "Colt Gateway Building",
@@ -429,21 +449,30 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "The rehabilitation of the Colt Gateway Building in Hartford, CT was a transformative project aimed at preserving its historical significance while modernizing its facilities. Originally home to the Colt Armory, this iconic structure underwent renovations to revitalize its use for contemporary purposes. The rehabilitation efforts include restoring its distinctive architecture, such as its red brick façade and iconic blue onion dome, while upgrading interior spaces to accommodate modern amenities and functionalities. Additionally, the project involved improving accessibility features, updating mechanical systems for energy efficiency, and ensuring compliance with building codes and regulations. Through this rehabilitation, the Colt Gateway Building will continue to serve as a prominent landmark in Hartford, honoring its past while embracing its future as a vibrant hub for commerce and culture.",
+
     noteworthyTitle: "Noteworthy Stats",
-    noteworthyBullets: [
-      "Concrete Restoration"
-    ],
+    noteworthyBullets: ["Concrete Restoration"],
 
     galleryTitle: "Project Gallery",
     galleryImages: [
-      { src: "/projects/project11/img1.png", alt: "Original industrial windows prior to restoration, showing deterioration and weathering." },
-      { src: "/projects/project11/img2.png", alt: "Industrial windows during restoration with scaffolding and active repair work in progress." },
-      { src: "/projects/project11/img3.png", alt: "Restored industrial windows following completion of masonry and façade repairs." },
+      {
+        src: "/projects/project11/img1.png",
+        alt: "Original industrial windows prior to restoration, showing deterioration and weathering.",
+      },
+      {
+        src: "/projects/project11/img2.png",
+        alt: "Industrial windows during restoration with scaffolding and active repair work in progress.",
+      },
+      {
+        src: "/projects/project11/img3.png",
+        alt: "Restored industrial windows following completion of masonry and façade repairs.",
+      },
     ],
 
     cardImage: { src: "/projects/project11.jpg", alt: "Colt Gateway Building" },
     cardTitle: "Colt Gateway\nBuilding",
   },
+
   {
     slug: "mohegan-sun-casino-resort-garages",
     title: "Mohegan Sun Casino & Resort Garages",
@@ -460,30 +489,29 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "The Mohegan Sun Casino & Resort Garage project is a comprehensive endeavor aimed at enhancing the safety, durability, and functionality of the parking facility. This extensive initiative involves a detailed assessment of the garage’s structural integrity to identify and address any deficiencies, such as cracks, spalling, or corrosion. Our skilled professionals executed concrete repairs, including patching, reinforcement installation, and crack sealing, to restore the strength and stability of the structure. Additionally, waterproofing measures were implemented to protect against water infiltration and damage, ensuring a secure environment for vehicles and patrons. Furthermore, the installation of expansion joints will help accommodate natural structural movement, mitigating potential damage and prolonging the lifespan of the garage. Through these combined efforts, the Mohegan Sun Casino & Resort Garage will be revitalized, providing reliable and safe parking facilities for visitors and staff.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Concrete Restoration",
       "Thermal-Moisture & Sealant Installation",
       "Expansion Joint Installation",
-      "Traffic Coating"
+      "Traffic Coating",
     ],
 
     galleryTitle: "Project Gallery",
     galleryImages: [],
 
-    cardImage: { 
-      src: "/projects/project12.png", 
-      alt: "Mohegan Sun Casino & Resort Garages" 
-    },
-
+    cardImage: { src: "/projects/project12.png", alt: "Mohegan Sun Casino & Resort Garages" },
     cardTitle: "Mohegan Sun Casino\n& Resort Garages",
   },
+
   {
     slug: "sloane-laboratories-yale",
     title: "Sloane Laboratories at Yale University",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "New Haven, CT",
-    serviceLabel: "Brownstone Repointing, Brownstone Repair & Replacement , Stone Dutchman Repair, Waterproofing & Flashing Repairs, Scaffolding Erection (access)",
+    serviceLabel:
+      "Brownstone Repointing, Brownstone Repair & Replacement , Stone Dutchman Repair, Waterproofing & Flashing Repairs, Scaffolding Erection (access)",
     yearLabel: "2022",
     heroImage: {
       src: "/projects/project13.jpg",
@@ -493,13 +521,14 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "The Sloane Laboratories at Yale University is a multifaceted initiative focused on preserving and enhancing the historic integrity of the building. This comprehensive undertaking includes repairing and restoring the masonry elements of the structure, addressing any deterioration or damage to ensure structural integrity and aesthetic appeal. Through these efforts, the Sloane Laboratories will be revitalized, maintaining its historic charm while ensuring a safe and functional environment for Yale University’s academic pursuits.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Brownstone Repointing",
       "Brownstone Repair & Replacement",
       "Stone Dutchman Repair",
       "Waterproofing & Flashing Repairs",
-      "Scaffolding Erection (access)"
+      "Scaffolding Erection (access)",
     ],
 
     galleryTitle: "Project Gallery",
@@ -508,12 +537,14 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project13.jpg", alt: "Sloane Laboratories at Yale University" },
     cardTitle: "Sloane Laboratories\nat Yale University",
   },
+
   {
     slug: "hartford-healthcare-pearl-street",
     title: "Hartford HealthCare",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "Hartford, CT",
-    serviceLabel: "Concrete Restoration , Waterproofing Installation, Thermal-Moisture & Sealant Installation",
+    serviceLabel:
+      "Concrete Restoration , Waterproofing Installation, Thermal-Moisture & Sealant Installation",
     yearLabel: "2023 - Present",
     heroImage: {
       src: "/projects/project14.jpg",
@@ -523,11 +554,12 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "The Hartford Healthcare Parking Garage project is a comprehensive initiative aimed at enhancing the safety, durability, and longevity of the parking facility. This undertaking involves a thorough assessment of the structure to identify and address any structural deficiencies, such as cracks, spalling, or corrosion. Our skilled professionals executed the concrete repairs, including patching, reinforcement installation, and crack sealing, to restore the integrity of the garage. Additionally, waterproofing measures were implemented to protect the structure from water infiltration and damage, ensuring a secure environment for vehicles and pedestrians alike. Through these combined efforts, the parking garage will be revitalized, providing reliable and safe parking facilities for Hartford Healthcare patients, visitors, and staff.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Concrete Restoration",
       "Waterproofing Installation",
-      "Thermal-Moisture & Sealant Installation"
+      "Thermal-Moisture & Sealant Installation",
     ],
 
     galleryTitle: "Project Gallery",
@@ -536,12 +568,14 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project14.jpg", alt: "Hartford HealthCare" },
     cardTitle: "Hartford\nHealthCare",
   },
+
   {
     slug: "ymca-greenwich",
     title: "YMCA Greenwich, CT",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "Greenwich, CT",
-    serviceLabel: "Masonry Repointing, Brick & Block Replacement , Cast-Stone Replacement, Roof Replacement , Painting",
+    serviceLabel:
+      "Masonry Repointing, Brick & Block Replacement , Cast-Stone Replacement, Roof Replacement , Painting",
     yearLabel: "2015",
     heroImage: {
       src: "/projects/project15.jpg",
@@ -551,13 +585,14 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "The YMCA Greenwich exterior facelift construction project was a comprehensive effort to revitalize and enhance the appearance of the facility’s outer structure. This project involved various improvements aimed at preserving its exterior architectural integrity. Plans included refurbishing the exterior façade, repairing and replacing cast stone masonry, and replacing the roof with slate. Overall, the goal of this construction project was to create a refreshed and appealing exterior that reflects the Greenwich YMCA’s rich culture and commitment to serving the community and promoting health and wellness.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Masonry Repointing",
       "Brick & Block Replacement",
       "Cast-Stone Replacement",
       "Roof Replacement",
-      "Painting"
+      "Painting",
     ],
 
     galleryTitle: "Project Gallery",
@@ -566,12 +601,14 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project15.jpg", alt: "YMCA Greenwich, CT" },
     cardTitle: "YMCA\nGreenwich, CT",
   },
+
   {
     slug: "foxwoods-resort-casino",
     title: "Foxwoods Resort Casino",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "Mashantucket, CT",
-    serviceLabel: "Joint Sealant Replacement (precast double-tee), Concrete Restoration, Traffic Coating, Drain Installation, Pressure Wash & Sealer",
+    serviceLabel:
+      "Joint Sealant Replacement (precast double-tee), Concrete Restoration, Traffic Coating, Drain Installation, Pressure Wash & Sealer",
     yearLabel: "2022-2023",
     heroImage: {
       src: "/projects/project16.jpg",
@@ -581,21 +618,23 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "The Foxwoods Casino repair project includes a comprehensive list of tasks aimed at enhancing structural integrity and aesthetics. This includes removing and replacing sealant joints at precast double-tee beams, preparing existing connections for inspection, and repairing concrete and connections where needed. Additionally, undermounted precast double-tee flange connection brackets will be installed, and the deck surface will be meticulously prepared and treated with migrating corrosion inhibitors and epoxy healer/sealers. Traffic-bearing membranes will be applied to deck crossovers, along with pavement markings for safety. Drain installation, fireproofing repairs at steel beams, and concrete repairs are also part of the restoration efforts. Lastly, water stains will be thoroughly cleaned from surfaces, ensuring the casino maintains its pristine appearance.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Joint Sealant Replacement (precast double-tee)",
       "Concrete Restoration",
       "Traffic Coating",
       "Drain Installation",
-      "Pressure Wash & Sealer"
+      "Pressure Wash & Sealer",
     ],
 
     galleryTitle: "Project Gallery",
-    galleryImages: [ ],
+    galleryImages: [],
 
     cardImage: { src: "/projects/project16.jpg", alt: "Foxwoods Resort Casino" },
     cardTitle: "Foxwoods Resort\nCasino",
   },
+
   {
     slug: "bridgeport-hospital",
     title: "Bridgeport Hospital Pedestrian Bridge Rehabilitation",
@@ -611,10 +650,9 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "Pedestrian bridge rehabilitation involves a meticulous process of restoring and enhancing the structural integrity and safety of a footbridge. Beginning with a comprehensive inspection, engineers identify areas of deterioration, such as rust, corrosion, or structural weaknesses. Our skilled workers then execute repairs, which may include replacing damaged components, reinforcing support structures, and applying protective coatings to prevent future degradation. Additionally, aesthetic improvements may be made to enhance the bridge’s appearance and ensure compliance with modern design standards. Through this rehabilitation process, pedestrian bridges are revitalized, providing safe and reliable passage for pedestrians while contributing to the overall beauty and functionality of the urban landscape.",
+
     noteworthyTitle: "Noteworthy Stats",
-    noteworthyBullets: [
-      "Waterproofing",
-    ],
+    noteworthyBullets: ["Waterproofing"],
 
     galleryTitle: "Project Gallery",
     galleryImages: [],
@@ -622,12 +660,14 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project17.jpg", alt: "Bridgeport Hospital" },
     cardTitle: "Bridgeport\nHospital",
   },
+
   {
     slug: "middlesex-hospital-parking-garage",
     title: "Middlesex Hospital Parking Garage Rehabilitation",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "Middletown, CT",
-    serviceLabel: "Concrete Restoration, Reinforcement Replacement, Epoxy Surface Coating, Concrete Sealer, Line Striping",
+    serviceLabel:
+      "Concrete Restoration, Reinforcement Replacement, Epoxy Surface Coating, Concrete Sealer, Line Striping",
     yearLabel: "2012 - Ongoing",
     heroImage: {
       src: "/projects/project18.jpg",
@@ -637,13 +677,14 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "Restoring a hospital parking garage involves a comprehensive approach encompassing structural repairs, concrete restoration, and epoxy surface coating application. The process begins with a thorough assessment to identify and address structural weaknesses, such as cracks, spalling, or corrosion, ensuring the safety and integrity of the garage. Skilled professionals execute concrete restoration work, including patching, reinforcement installation, and crack sealing, to reinforce compromised areas and prevent further deterioration. Finally, a durable epoxy surface coating is applied to the garage top deck, enhancing durability, resistance to wear and tear, and facilitating easy maintenance. Through these measures, the parking garage is restored to optimal condition, providing a safe and reliable space for hospital staff, patients, and visitors.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Concrete Restoration",
       "Reinforcement Replacement",
       "Epoxy Surface Coating",
       "Concrete Sealer",
-      "Line Striping"
+      "Line Striping",
     ],
 
     galleryTitle: "Project Gallery",
@@ -652,12 +693,14 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project18.jpg", alt: "Middlesex Hospital Parking Garage" },
     cardTitle: "Middlesex Hospital\nParking Garage",
   },
+
   {
     slug: "yale-paul-rudolph-hall",
     title: "Yale University – Paul Rudolph Hall",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "New Haven, CT",
-    serviceLabel: "Vertical & Horizontal Concrete Restoration, Restoring/Cleaning Exterior Surfaces, Waterproof Installation, Sealer Application , Thermal-Moisture/Sealant Installation",
+    serviceLabel:
+      "Vertical & Horizontal Concrete Restoration, Restoring/Cleaning Exterior Surfaces, Waterproof Installation, Sealer Application , Thermal-Moisture/Sealant Installation",
     yearLabel: "2009",
     heroImage: {
       src: "/projects/project19.jpg",
@@ -667,13 +710,14 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "Collaborating with specialists in architecture and design, the concrete restoration project focuses on revitalizing a significant landmark. Erected in 1963, this Brutalist masterpiece stands as a cornerstone of the Yale campus, commanding attention from a gateway corner. Spanning 114,000 square feet, the cast-in-place concrete structure boasts a formidable exterior that contrasts with its intricately designed interior. With 37 terraced levels spread across nine stories, including two below ground, the building offers a surprisingly expansive and multifaceted space within its fortress-like facade",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Vertical & Horizontal Concrete Restoration",
       "Restoring/Cleaning Exterior Surfaces",
       "Waterproof Installation",
       "Sealer Application",
-      "Thermal-Moisture/Sealant Installation"
+      "Thermal-Moisture/Sealant Installation",
     ],
 
     galleryTitle: "Project Gallery",
@@ -681,18 +725,20 @@ export const projects: Project[] = [
       { src: "/projects/project19/img1.png", alt: "Rooftop terrace with planters and seating." },
       { src: "/projects/project19/img2.jpg", alt: "Exterior building façade after restoration." },
       { src: "/projects/project19/img3.png", alt: "Concrete courtyard with planters." },
-      { src: "/projects/project19/img4.jpg", alt: "Glass corner façade detail."},
+      { src: "/projects/project19/img4.jpg", alt: "Glass corner façade detail." },
     ],
 
     cardImage: { src: "/projects/project19.jpg", alt: "Yale University Paul Rudolph Hall" },
     cardTitle: "Yale University\nPaul Rudolph Hall",
   },
+
   {
     slug: "crown-temple-street-garages",
     title: "Crown & Temple Street Garages",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "New Haven, CT",
-    serviceLabel: "Waterproofing, Parking Structure Restoration, Concrete Restoration, Masonry Restoration",
+    serviceLabel:
+      "Waterproofing, Parking Structure Restoration, Concrete Restoration, Masonry Restoration",
     yearLabel: "2023",
     heroImage: {
       src: "/projects/project20.jpg",
@@ -702,12 +748,13 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "Restoring a parking garage involves comprehensive structural and concrete repairs to ensure safety and longevity. Initially, a thorough assessment is conducted to identify areas of deterioration, such as cracks, spalling, or corrosion. Skilled professionals then undertake repair work, which included concrete patching, reinforcement installation, and crack sealing to address structural weaknesses ensuring the parking garage remains a safe and functional asset for years to come.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Waterproofing",
       "Parking Structure Restoration",
       "Concrete Restoration",
-      "Masonry Restoration"
+      "Masonry Restoration",
     ],
 
     galleryTitle: "Project Gallery",
@@ -721,12 +768,14 @@ export const projects: Project[] = [
     cardImage: { src: "/projects/project20.jpg", alt: "Crown & Temple Street Garages" },
     cardTitle: "Crown & Temple Street\nGarages",
   },
+
   {
     slug: "st-roch-church-rehabilitation",
     title: "St. Roch Church Rehabilitation",
     completedLabel: "COMPLETED PROJECT",
     locationLabel: "Greenwich, CT",
-    serviceLabel: "Granite Stone Replacement & Reinstallation , Granite Facade Repointing, Terra-Cotta Cap-Stone Replacement , Bell Tower Roof Replacement , Concrete Sidewalk Replacement, Stucco Installation",
+    serviceLabel:
+      "Granite Stone Replacement & Reinstallation , Granite Facade Repointing, Terra-Cotta Cap-Stone Replacement , Bell Tower Roof Replacement , Concrete Sidewalk Replacement, Stucco Installation",
     yearLabel: "2022",
     heroImage: {
       src: "/projects/project21.jpg",
@@ -736,6 +785,7 @@ export const projects: Project[] = [
     challengeTitle: "Our Challenge",
     challengeBody:
       "Restoring the exterior masonry of a historic church involves meticulous craftsmanship and attention to detail. The process begins with a thorough assessment of the existing masonry, identifying areas of damage such as cracks, erosion, or dislodged stones. Skilled masons then carefully remove damaged sections and clean the surface to reveal the original beauty of the stone or brickwork. Using traditional techniques and materials, such as lime mortar, they skillfully repair and replace damaged elements, ensuring structural integrity while preserving the architectural integrity of the building. Finally, the restored masonry is protected with appropriate sealants or coatings to safeguard against future deterioration, ensuring the church remains a beacon of history and heritage for generations to come.",
+
     noteworthyTitle: "Noteworthy Stats",
     noteworthyBullets: [
       "Granite Stone Replacement & Reinstallation",
@@ -743,7 +793,7 @@ export const projects: Project[] = [
       "Terra-Cotta Cap-Stone Replacement",
       "Bell Tower Roof Replacement",
       "Concrete Sidewalk Replacement",
-      "Stucco Installation"
+      "Stucco Installation",
     ],
 
     galleryTitle: "Project Gallery",
@@ -756,6 +806,23 @@ export const projects: Project[] = [
     cardTitle: "St. Roch Church\nRehabilitation",
   },
 ]
+
+// ✅ Export with lowSrc filled in for hero, card, and gallery
+export const projects: Project[] = RAW_PROJECTS.map((p) => ({
+  ...p,
+  heroImage: {
+    ...p.heroImage,
+    lowSrc: toLowSrc(p.heroImage.src),
+  },
+  cardImage: {
+    ...p.cardImage,
+    lowSrc: toLowSrc(p.cardImage.src),
+  },
+  galleryImages: (p.galleryImages ?? []).map((g) => ({
+    ...g,
+    lowSrc: toLowSrc(g.src),
+  })),
+}))
 
 export function getProjectBySlug(slug: string) {
   return projects.find((p) => p.slug === slug) ?? null

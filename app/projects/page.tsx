@@ -2,6 +2,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import Image from "next/image"
 import Link from "next/link"
+import ProgressiveImage from "@/components/ProgressiveImage"
 
 import type { Metadata } from "next"
 import { projects } from "@/lib/projects"
@@ -19,12 +20,18 @@ export default function ProjectsPage() {
 
       {/* HERO */}
       <section className="relative flex items-center justify-center min-h-[295px] lg:min-h-[365px]">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/projects.png')" }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
+        <div className="absolute inset-0">
+        <ProgressiveImage
+          lowSrc="/projects-low.jpg"
+          highSrc="/projects.png"
+          alt="Projects hero background"
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
+
 
         <div className="relative z-10 flex items-center justify-center px-6 text-center">
           <h1 className="text-4xl font-extrabold uppercase tracking-tight text-white md:text-5xl lg:text-6xl">
@@ -45,13 +52,15 @@ export default function ProjectsPage() {
               >
                 {/* Image */}
                 <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={p.cardImage.src}
-                    alt={p.cardImage.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
+                <ProgressiveImage
+                  lowSrc={p.cardImage.lowSrc}
+                  highSrc={p.cardImage.src}
+                  alt={p.cardImage.alt}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+
 
                 {/* Content */}
                 <div className="px-7 py-7">

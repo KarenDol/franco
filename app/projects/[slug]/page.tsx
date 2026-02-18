@@ -5,6 +5,9 @@ import ProjectGalleryLightbox from "@/components/ProjectGalleryLightbox"
 import { projects, getProjectBySlug, getRecentProjects } from "@/lib/projects"
 import { Poppins } from "next/font/google"
 
+// ✅ add your progressive loader
+import ProgressiveImage from "@/components/ProgressiveImage"
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -28,7 +31,9 @@ export default async function ProjectPage({
 
   const recent = getRecentProjects(project.slug, 3)
 
+  // ✅ prefer hero image, fallback to card
   const heroSrc = project.heroImage?.src || project.cardImage?.src
+  const heroLowSrc = project.heroImage?.lowSrc || project.cardImage?.lowSrc || heroSrc
   const heroAlt = project.heroImage?.alt || project.cardImage?.alt || project.title
 
   return (
@@ -37,7 +42,15 @@ export default async function ProjectPage({
 
       {/* ================= HERO ================= */}
       <section className="relative h-[420px] md:h-[560px] w-full overflow-hidden">
-        <Image src={heroSrc} alt={heroAlt} fill priority className="object-cover" />
+        {/* ✅ Progressive hero */}
+        <ProgressiveImage
+          lowSrc={heroLowSrc}
+          highSrc={heroSrc}
+          alt={heroAlt}
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
 
         <div className="absolute inset-0 bg-black/20" />
 
@@ -85,6 +98,7 @@ export default async function ProjectPage({
               {project.galleryTitle}
             </h2>
 
+            {/* assumes your ProjectGalleryLightbox can ignore extra fields */}
             <ProjectGalleryLightbox images={project.galleryImages} />
 
             <div className="mt-10 bg-[#111] text-white px-8 py-7">
@@ -111,7 +125,6 @@ export default async function ProjectPage({
             Recent Projects
           </h2>
 
-          {/* ✅ UPDATED: whole cards are links */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
             {recent.map((p) => (
               <Link
@@ -120,10 +133,12 @@ export default async function ProjectPage({
                 className="group block bg-white border border-black/10 shadow-sm overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="relative aspect-[16/9] bg-neutral-100 overflow-hidden">
-                  <Image
-                    src={p.cardImage.src}
+                  {/* ✅ Progressive card */}
+                  <ProgressiveImage
+                    lowSrc={p.cardImage.lowSrc}
+                    highSrc={p.cardImage.src}
                     alt={p.cardImage.alt}
-                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -133,7 +148,6 @@ export default async function ProjectPage({
                     {p.cardTitle}
                   </h3>
 
-                  {/* not a Link anymore (prevents nested links) */}
                   <span className="inline-block mt-6 text-[#E7000B] font-bold tracking-[0.15em] text-xs">
                     VIEW DETAILS
                   </span>
