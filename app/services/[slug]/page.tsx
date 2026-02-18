@@ -4,6 +4,7 @@ import ServiceHero from "@/components/services/service-hero"
 import ServiceDescription from "@/components/services/service-description"
 import WhyChooseSection from "@/components/services/why-choose-section"
 import GallerySection from "@/components/services/gallery-section"
+import BeforeAfterSlider from "@/components/BeforeAfterSlider"
 
 import { SERVICES, type ServiceKey } from "@/lib/services"
 import type { Metadata } from "next"
@@ -37,22 +38,38 @@ export default async function ServicePage({ params }: Props) {
 
       <ServiceHero
         bgImage={service.hero.bgImage}
-        bgLowImage={service.hero.bgLowImage} // ✅ NEW
+        bgLowImage={service.hero.bgLowImage}
         eyebrow={service.hero.eyebrow}
         headingLine1={service.hero.headingLine1}
         headingLine2={service.hero.headingLine2}
-        priority // ✅ hero is above the fold
+        priority
       />
 
       <ServiceDescription text={service.description} />
 
       <WhyChooseSection
         image={service.why.image}
-        lowImage={service.why.lowImage} // ✅ NEW
+        lowImage={service.why.lowImage}
         lead={service.why.lead}
         points={service.why.points}
-        priority={false} // (optional) set true only if this is above fold
+        priority={false}
       />
+
+      {key === "historic" && (
+      <section className="bg-background px-6 py-16 lg:py-20">
+        <div className="mx-auto max-w-5xl">
+          <BeforeAfterSlider
+            beforeSrc="/services/historic_face_after.jpg"
+            afterSrc="/services/historic_face_before.jpg"
+            beforeLabel="Before"
+            afterLabel="After"
+            initial={50}
+            priority={false}
+            className="mx-auto aspect-[4/3] max-w-3xl"
+          />
+        </div>
+      </section>
+    )}
 
       <GallerySection images={service.gallery} />
 

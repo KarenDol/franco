@@ -21,7 +21,7 @@ export default function AboutHero() {
       {/* Progressive poster is ALWAYS there under video */}
       <div className="absolute inset-0">
         <ProgressiveImage
-          lowSrc="/about-us-low.jpg"
+          lowSrc="/about-us-poster.jpg"
           highSrc="/about-us-poster.jpg"
           alt="About Us"
           priority

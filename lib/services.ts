@@ -88,7 +88,7 @@ export const SERVICES: Record<ServiceKey, ServiceData> = {
     description:
       "Our Masonry Restoration experience goes back over 50 years. We’ve earned a name in Masonry Restoration in the state of Connecticut for both our time in the industry and our reputation for taking on a variety of challenging Masonry Restoration projects. From storefronts to historic buildings, large or small, we have seen it all and have the skills, the tools, and the people to take on the challenge.",
     why: {
-      image: "/services/service2_card.jpg",
+      image: "/services/service2_card.png",
       lowImage: "/services/service2_card_low.jpg",
       lead:
         "We have over 50 years of experience in Masonry Restoration to help maximize the return on your investment.",
