@@ -4,20 +4,67 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState, useRef } from "react"
 
+// Network Information API (not in standard Navigator types)
+type NavigatorWithConnection = Navigator & {
+  connection?: { saveData?: boolean; effectiveType?: string }
+}
+
+// Prefer poster-only on mobile/slow connections to avoid lag
+function shouldLoadVideo(): boolean {
+  if (typeof window === "undefined") return true
+  const nav = navigator as NavigatorWithConnection
+  // Skip video when user prefers less data
+  if (nav.connection?.saveData) return false
+  // Optional: skip on slow connection (uncomment if you want)
+  // if (nav.connection?.effectiveType === "2g" || nav.connection?.effectiveType === "slow-2g") return false
+  // Optional: skip on small viewports to reduce decode cost (uncomment if needed)
+  // if (window.innerWidth < 768) return false
+  return true
+}
+
 export default function HeroSection() {
   const [reducedMotion, setReducedMotion] = useState(false)
   const [videoReady, setVideoReady] = useState(false)
   const [hiLoaded, setHiLoaded] = useState(false)
+  const [videoShouldLoad, setVideoShouldLoad] = useState<boolean | null>(null)
+  const [videoSrc, setVideoSrc] = useState<string | null>(null)
 
   const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
     setReducedMotion(mediaQuery.matches)
+    setVideoShouldLoad(shouldLoadVideo())
   }, [])
 
+  // Defer loading video until hero is in view (reduces initial load and decode jank)
+  useEffect(() => {
+    if (videoShouldLoad === false || reducedMotion) return
+
+    const el = sectionRef.current
+    if (!el) return
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries
+        if (entry?.isIntersecting && !videoSrc) {
+          setVideoSrc("/background.mp4")
+        }
+      },
+      { rootMargin: "50px", threshold: 0.1 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [videoShouldLoad, reducedMotion, videoSrc])
+
+  const showVideo = !reducedMotion && videoShouldLoad !== false && videoSrc
+
   return (
-    <section className="relative flex min-h-[600px] items-center justify-center overflow-hidden lg:min-h-[700px]">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[600px] items-center justify-center overflow-hidden lg:min-h-[700px]"
+    >
 
       {/* ================= Progressive Image ================= */}
 
@@ -51,13 +98,14 @@ export default function HeroSection() {
 
       </div>
 
-      {/* ================= Video ================= */}
+      {/* ================= Video (deferred, only when in view + not low-data) ================= */}
 
-      {!reducedMotion && (
+      {showVideo && (
         <video
           ref={videoRef}
           className={[
             "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
+            "[transform:translateZ(0)] [backface-visibility:hidden]",
             videoReady ? "opacity-100" : "opacity-0",
           ].join(" ")}
           autoPlay
@@ -67,7 +115,7 @@ export default function HeroSection() {
           preload="metadata"
           onLoadedData={() => setVideoReady(true)}
         >
-          <source src="/background.mp4" type="video/mp4" />
+          {videoSrc && <source src={videoSrc} type="video/mp4" />}
         </video>
       )}
 

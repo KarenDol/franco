@@ -1,0 +1,80 @@
+1:"$Sreact.fragment"
+2:I[13293,["/_next/static/chunks/5737de1a1681d093.js","/_next/static/chunks/6c227566b5dc0273.js","/_next/static/chunks/969e170a5d64f536.js"],"default"]
+3:I[64190,["/_next/static/chunks/5737de1a1681d093.js","/_next/static/chunks/6c227566b5dc0273.js","/_next/static/chunks/969e170a5d64f536.js"],"default"]
+c:I[96335,["/_next/static/chunks/5737de1a1681d093.js","/_next/static/chunks/6c227566b5dc0273.js","/_next/static/chunks/969e170a5d64f536.js"],"default"]
+d:I[22016,["/_next/static/chunks/5737de1a1681d093.js","/_next/static/chunks/6c227566b5dc0273.js","/_next/static/chunks/969e170a5d64f536.js"],""]
+e:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+f:"$Sreact.suspense"
+:HL["/_next/static/chunks/1bdb157e77978487.css","style"]
+4:Td7f,<p style="margin: 0; font-weight: 700; color: rgba(0,0,0,0.55);">
+        Project Overview
+      </p>
+
+      <p style="margin-top: 10px;">
+        The Yale University Amistad Parking Garage Repairs project is a comprehensive structural, architectural, and
+        waterproofing restoration program designed to extend the service life, performance, and safety of a multi-level
+        parking structure. The scope includes targeted structural concrete repairs, masonry restoration, waterproofing
+        upgrades, sealant replacement, stucco repairs, miscellaneous metals improvements, and multiple building envelope
+        enhancements.
+      </p>
+
+      <h3 style="margin-top: 30px; font-weight: 800;">
+        Scope of Work Summary
+      </h3>
+
+      <ol style="margin-top: 14px; padding-left: 22px;">
+        <li style="margin-top: 12px;">
+          <strong>Masonry &amp; Concrete Restoration (Bid Package 04A – Masonry)</strong>
+          <ul style="margin-top: 10px; padding-left: 18px; list-style-type: circle;">
+            <li>Dust control and daily debris removal.</li>
+            <li>Selective demolition of deteriorated masonry and concrete elements.</li>
+            <li>Surface cleaning and power washing.</li>
+            <li>Full-depth and partial-depth concrete repairs at double tees.</li>
+            <li>Crack routing and sealing.</li>
+            <li>Expansion joint replacement.</li>
+            <li>Closure topping slab installation.</li>
+            <li>Brick masonry crack repairs and repointing.</li>
+            <li>CMU wall crack repairs and unit replacement as required.</li>
+            <li>Sidewalk and curb repairs.</li>
+            <li>Concrete patching at drain locations and electrical conduit paths.</li>
+          </ul>
+        </li>
+
+        <li style="margin-top: 18px;">
+          <strong>Miscellaneous Metals (Bid Package 05A – Misc. Metals)</strong>
+          <ol style="margin-top: 10px; padding-left: 18px;">
+            <li>Installation of DTFC clips (3,650 units).</li>
+            <li>Replacement of metal access hatches at elevator locations.</li>
+          </ol>
+        </li>
+
+        <li style="margin-top: 18px;">
+          <strong>Stucco Repairs (Bid Package 07A – Stucco)</strong>
+          <ul style="margin-top: 10px; padding-left: 18px; list-style-type: circle;">
+            <li>Removal and replacement of spalled stucco at the top level.</li>
+          </ul>
+        </li>
+
+        <li style="margin-top: 18px;">
+          <strong>Sealants &amp; Waterproofing (Bid Package 07D – Sealants)</strong>
+          <ul style="margin-top: 10px; padding-left: 18px; list-style-type: circle;">
+            <li>Installation of a new traffic-bearing waterproof membrane.</li>
+            <li>Re-coating of the existing 1st-level traffic membrane (~20,000 SF).</li>
+            <li>Localized membrane system repairs (~200 SF).</li>
+            <li>Installation of a full traffic coating system at the top deck (~41,000 SF).</li>
+            <li>Replacement of all sealants between double tees and at penetrations.</li>
+            <li>Installation of new self-leveling slab-to-wall sealants.</li>
+            <li>Replacement of EMSEAL joints at precast/stair tower connections (~430 LF).</li>
+            <li>Sealant replacement at lifting lugs and biscuit locations.</li>
+            <li>Penetrating sealer application on floors not receiving coatings.</li>
+          </ul>
+        </li>
+      </ol>0:{"buildId":"0_zyHrSYP0RQaGssHHVMe","rsc":["$","$1","c",{"children":[["$","main",null,{"className":"poppins_217037ff-module__-n7l_q__className bg-white","children":[["$","$L2",null,{}],["$","section",null,{"className":"relative h-[420px] md:h-[560px] w-full overflow-hidden","children":[["$","$L3",null,{"lowSrc":"/projects/project1-low.jpg","highSrc":"/projects/project1.jpg","alt":"Yale University Amistad Parking Garage","priority":true,"sizes":"100vw","className":"object-cover"}],["$","div",null,{"className":"absolute inset-0 bg-black/20"}],["$","div",null,{"className":"absolute inset-0 flex flex-col items-center justify-center text-center px-6","children":[["$","div",null,{"className":"max-w-6xl w-full","children":[["$","p",null,{"className":"text-white/85 tracking-[0.25em] text-xs md:text-sm font-semibold","children":"COMPLETED PROJECT"}],["$","h1",null,{"className":"mt-4 text-white font-black leading-[0.95] tracking-[-0.03em] text-4xl sm:text-5xl md:text-7xl","children":"Yale University – Amistad Parking Garage Repairs"}]]}],["$","div",null,{"className":"mt-16 md:mt-24 w-full px-6","children":["$","div",null,{"className":"mx-auto max-w-6xl bg-black/40 px-6 md:px-10 py-4 md:py-6 lg:py-8","children":["$","div",null,{"className":"grid grid-cols-3 items-center text-white font-extrabold text-sm md:text-base lg:text-lg","children":[["$","div",null,{"className":"text-left","children":"New Haven, Connecticut"}],["$","div",null,{"className":"text-center","children":"A/Z Corporation Project No. X81849"}],["$","div",null,{"className":"text-right","children":""}]]}]}]}]]}],["$","div",null,{"className":"absolute bottom-0 left-0 w-full h-[3px] bg-[#E7000B]"}]]}],["$","section",null,{"className":"mx-auto max-w-6xl px-6 md:px-8 py-14 md:py-20","children":["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start","children":[["$","div",null,{"children":[["$","h2",null,{"className":"text-[30px] md:text-[36px] font-bold tracking-[-0.02em]","children":"Our Challenge"}],["$","div",null,{"className":"mt-6 text-[20px] md:text-base leading-9 text-black/50 text-balance","dangerouslySetInnerHTML":{"__html":"$4"}}]]}],"$L5"]}]}],"$L6"]}],["$L7","$L8","$L9","$La"],"$Lb"]}],"loading":null,"isPartial":false}
+5:["$","div",null,{"children":[["$","h2",null,{"className":"text-[30px] md:text-[36px] font-bold leading-tight tracking-[-0.02em]","children":"Project Gallery"}],["$","$Lc",null,{"images":[{"src":"/projects/project1/img1.jpg","alt":"Amistad Garage aerial view","lowSrc":"/projects/project1/img1-low.jpg"},{"src":"/projects/project1/img2.jpg","alt":"Top deck / roof area","lowSrc":"/projects/project1/img2-low.jpg"},{"src":"/projects/project1/img3.jpg","alt":"Membrane / waterproofing detail","lowSrc":"/projects/project1/img3-low.jpg"},{"src":"/projects/project1/img4.jpeg","alt":"Field work in progress","lowSrc":"/projects/project1/img4-low.jpg"}]}],["$","div",null,{"className":"mt-10 bg-[#111] text-white px-8 py-7","children":["$","h3",null,{"className":"text-xl md:text-2xl font-bold","children":"Noteworthy Stats"}]}],["$","ul",null,{"className":"mt-6 list-disc pl-6 space-y-1 text-[20px] italic font-medium text-black/90","children":[["$","li","Restore structural integrity.",{"children":"Restore structural integrity."}],["$","li","Enhance waterproofing and reduce infiltration.",{"children":"Enhance waterproofing and reduce infiltration."}],["$","li","Improve pedestrian and vehicle safety.",{"children":"Improve pedestrian and vehicle safety."}],["$","li","Extend long-term facility durability.",{"children":"Extend long-term facility durability."}],["$","li","Minimize operational disruptions for Yale University.",{"children":"Minimize operational disruptions for Yale University."}],["$","li","A/Z Corporation Project No. X81849",{"children":"A/Z Corporation Project No. X81849"}]]}]]}]
+6:["$","section",null,{"className":"bg-white","children":["$","div",null,{"className":"mx-auto max-w-6xl px-6 md:px-8 py-16 md:py-20 text-center","children":[["$","p",null,{"className":"text-notmal tracking-[0.35em] font-semibold text-black/50 underline decoration-[#E7000B] decoration-2 underline-offset-4","children":"VIEW OTHER"}],["$","h2",null,{"className":"mt-3 text-4xl md:text-6xl font-bold tracking-[-0.03em]","children":"Recent Projects"}],["$","div",null,{"className":"mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left","children":[["$","$Ld","naugatuck-hillside",{"href":"/projects/naugatuck-hillside","className":"group block bg-white border border-black/10 shadow-sm overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg","children":[["$","div",null,{"className":"relative aspect-[16/9] bg-neutral-100 overflow-hidden","children":["$","$L3",null,{"lowSrc":"/projects/project2-low.jpg","highSrc":"/projects/project2.jpg","alt":"Naugatuck Hillside Intermediate School","sizes":"(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw","className":"object-cover transition-transform duration-500 group-hover:scale-105"}]}],["$","div",null,{"className":"p-7","children":[["$","h3",null,{"className":"text-xl md:text-2xl font-extrabold leading-tight whitespace-pre-line","children":"Naugatuck Hillside\nIntermediate School"}],["$","span",null,{"className":"inline-block mt-6 text-[#E7000B] font-bold tracking-[0.15em] text-xs","children":"VIEW DETAILS"}]]}]]}],["$","$Ld","yale-hill-house",{"href":"/projects/yale-hill-house","className":"group block bg-white border border-black/10 shadow-sm overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg","children":[["$","div",null,{"className":"relative aspect-[16/9] bg-neutral-100 overflow-hidden","children":["$","$L3",null,{"lowSrc":"/projects/project3-low.jpg","highSrc":"/projects/project3.jpg","alt":"Yale President’s House Hill House","sizes":"(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw","className":"object-cover transition-transform duration-500 group-hover:scale-105"}]}],["$","div",null,{"className":"p-7","children":[["$","h3",null,{"className":"text-xl md:text-2xl font-extrabold leading-tight whitespace-pre-line","children":"Yale President’s House\nHill House"}],["$","span",null,{"className":"inline-block mt-6 text-[#E7000B] font-bold tracking-[0.15em] text-xs","children":"VIEW DETAILS"}]]}]]}],["$","$Ld","st-mary-church-stamford",{"href":"/projects/st-mary-church-stamford","className":"group block bg-white border border-black/10 shadow-sm overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg","children":[["$","div",null,{"className":"relative aspect-[16/9] bg-neutral-100 overflow-hidden","children":["$","$L3",null,{"lowSrc":"/projects/project4-low.jpg","highSrc":"/projects/project4.png","alt":"St. Mary Church of Stamford","sizes":"(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw","className":"object-cover transition-transform duration-500 group-hover:scale-105"}]}],["$","div",null,{"className":"p-7","children":[["$","h3",null,{"className":"text-xl md:text-2xl font-extrabold leading-tight whitespace-pre-line","children":"St. Mary Church\nof Stamford"}],["$","span",null,{"className":"inline-block mt-6 text-[#E7000B] font-bold tracking-[0.15em] text-xs","children":"VIEW DETAILS"}]]}]]}]]}],["$","$Ld",null,{"href":"/projects","className":"inline-flex items-center justify-center mt-14 bg-[#E7000B] text-white font-extrabold tracking-[0.18em] text-xs px-10 py-5","children":"VIEW ALL PROJECTS"}]]}]}]
+7:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/1bdb157e77978487.css","precedence":"next"}]
+8:["$","script","script-0",{"src":"/_next/static/chunks/5737de1a1681d093.js","async":true}]
+9:["$","script","script-1",{"src":"/_next/static/chunks/6c227566b5dc0273.js","async":true}]
+a:["$","script","script-2",{"src":"/_next/static/chunks/969e170a5d64f536.js","async":true}]
+b:["$","$Le",null,{"children":["$","$f",null,{"name":"Next.MetadataOutlet","children":"$@10"}]}]
+10:null
